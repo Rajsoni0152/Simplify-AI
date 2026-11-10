@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SimplifyAI — Course Content Simplification Agent</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       TOP HEADER / NAVBAR
+  ══════════════════════════════════════ -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon">S</div>
+        <div class="brand-text">
+          <span class="brand-name">SimplifyAI</span>
+          <span class="brand-sub">Course Content Simplification Agent</span>
+        </div>
+      </div>
+      <div class="header-badge">
+        <span class="badge-dot"></span>
+        IBM SkillsBuild &bull; Project 19
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       MAIN LAYOUT
+  ══════════════════════════════════════ -->
+  <main class="main">
+
+    <!-- ── LEFT PANEL: INPUT ── -->
+    <section class="panel panel-input" id="inputPanel">
+
+      <!-- Title -->
+      <div class="panel-title">
+        <span class="panel-icon">📝</span>
+        <div>
+          <h2>Paste Your Study Material</h2>
+          <p>Paste any difficult paragraph, chapter, or topic below.</p>
+        </div>
+      </div>
+
+      <!-- Textarea -->
+      <div class="textarea-wrap">
+        <textarea
+          id="inputText"
+          placeholder="Paste your difficult study content here…
+
+Example: Machine learning is a subset of artificial intelligence that provides systems the ability to automatically learn and improve from experience without being explicitly programmed..."
+          spellcheck="false"
+        ></textarea>
+        <div class="textarea-footer">
+          <span id="wordCount">0 words</span>
+          <button class="btn-ghost" id="clearBtn" title="Clear input">✕ Clear</button>
+        </div>
+      </div>
+
+      <!-- Level Selector -->
+      <div class="level-section">
+        <p class="level-label">Select Explanation Level:</p>
+        <div class="level-cards" id="levelCards">
+          <button class="level-card active" data-level="beginner">
+            <span class="level-emoji">🌱</span>
+            <span class="level-title">Beginner</span>
+            <span class="level-desc">Simple words, easy to understand</span>
+          </button>
+          <button class="level-card" data-level="intermediate">
+            <span class="level-emoji">📘</span>
+            <span class="level-title">Intermediate</span>
+            <span class="level-desc">Balanced detail & clarity</span>
+          </button>
+          <button class="level-card" data-level="expert">
+            <span class="level-emoji">🎓</span>
+            <span class="level-title">Expert</span>
+            <span class="level-desc">Technical depth & accuracy</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Simplify Button -->
+      <button class="btn-simplify" id="simplifyBtn">
+        <span class="btn-icon">✨</span>
+        <span class="btn-label">Simplify Content</span>
+      </button>
+
+      <!-- Tips -->
+      <div class="tips-box">
+        <p class="tips-title">💡 Tips for best results:</p>
+        <ul>
+          <li>Paste at least 2–3 sentences</li>
+          <li>Works great with textbook paragraphs</li>
+          <li>Try all three levels to compare</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- ── RIGHT PANEL: OUTPUT ── -->
+    <section class="panel panel-output" id="outputPanel">
+
+      <!-- Placeholder (shown before processing) -->
+      <div class="output-placeholder" id="outputPlaceholder">
+        <div class="placeholder-icon">🤖</div>
+        <h3>Your simplified content will appear here</h3>
+        <p>Paste your study material on the left and click <strong>Simplify Content</strong> to get started.</p>
+      </div>
+
+      <!-- Loading State -->
+      <div class="output-loading hidden" id="outputLoading">
+        <div class="loader-ring"></div>
+        <p>Analyzing your content…</p>
+      </div>
+
+      <!-- Results (shown after processing) -->
+      <div class="output-results hidden" id="outputResults">
+
+        <!-- Output Tabs Navigation -->
+        <div class="tabs-nav" id="tabsNav">
+          <button class="tab-btn active" data-tab="simplify">💬 Simplified</button>
+          <button class="tab-btn" data-tab="vocab">📖 Key Words</button>
+          <button class="tab-btn" data-tab="summary">📄 Summary</button>
+          <button class="tab-btn" data-tab="qa">❓ Q &amp; A</button>
+          <button class="tab-btn" data-tab="notes">📌 Notes</button>
+        </div>
+
+        <!-- Tab: Simplified Explanation -->
+        <div class="tab-panel active" id="tab-simplify">
+          <div class="output-card">
+            <div class="output-card-header">
+              <span class="output-card-title">💬 Simplified Explanation</span>
+              <button class="copy-btn" data-target="simplifyOutput">⎘ Copy</button>
+            </div>
+            <div class="output-body" id="simplifyOutput"></div>
+          </div>
+        </div>
+
+        <!-- Tab: Key Vocabulary -->
+        <div class="tab-panel hidden" id="tab-vocab">
+          <div class="output-card">
+            <div class="output-card-header">
+              <span class="output-card-title">📖 Difficult Words Explained</span>
+              <button class="copy-btn" data-target="vocabOutput">⎘ Copy</button>
+            </div>
+            <div class="output-body" id="vocabOutput"></div>
+          </div>
+        </div>
+
+        <!-- Tab: Summary -->
+        <div class="tab-panel hidden" id="tab-summary">
+          <div class="output-card">
+            <div class="output-card-header">
+              <span class="output-card-title">📄 Short Summary</span>
+              <button class="copy-btn" data-target="summaryOutput">⎘ Copy</button>
+            </div>
+            <div class="output-body" id="summaryOutput"></div>
+          </div>
+        </div>
+
+        <!-- Tab: Q&A -->
+        <div class="tab-panel hidden" id="tab-qa">
+          <div class="output-card">
+            <div class="output-card-header">
+              <span class="output-card-title">❓ Important Questions &amp; Answers</span>
+              <button class="copy-btn" data-target="qaOutput">⎘ Copy</button>
+            </div>
+            <div class="output-body" id="qaOutput"></div>
+          </div>
+        </div>
+
+        <!-- Tab: Notes -->
+        <div class="tab-panel hidden" id="tab-notes">
+          <div class="output-card">
+            <div class="output-card-header">
+              <span class="output-card-title">📌 Bullet-Point Notes</span>
+              <button class="copy-btn" data-target="notesOutput">⎘ Copy</button>
+            </div>
+            <div class="output-body" id="notesOutput"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /output-results -->
+
+    </section>
+    <!-- /right panel -->
+
+  </main>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="footer">
+    <p>
+      <strong>SimplifyAI</strong> &mdash; IBM SkillsBuild AICTE Internship Project 19
+      &nbsp;&bull;&nbsp; Built by <strong>Raj Soni</strong> &bull; BCA 2nd Year (AI &amp; ML)
+    </p>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">✅ Copied to clipboard!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

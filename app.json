@@ -1,0 +1,20 @@
+
+{
+  "name": "SimplifyAI",
+  "version": "1.0.0",
+  "description": "Course Content Simplification Agent",
+  "project": "IBM University Engagement Project",
+  "technology": [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "IBM watsonx.ai Prompt Lab"
+  ],
+  "features": [
+    "Simplified Explanation",
+    "Important Keywords",
+    "Short Summary",
+    "Questions and Answers",
+    "Quick Revision Notes"
+  ]
+}

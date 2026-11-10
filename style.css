@@ -1,0 +1,681 @@
+/* ============================================================
+   SimplifyAI — style.css
+   IBM SkillsBuild AICTE Internship — Project 19
+   Author: Raj Soni | BCA 2nd Year AI & ML
+   ============================================================ */
+
+/* ── 1. RESET & ROOT VARIABLES ─────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Brand colours */
+  --blue:        #1d4ed8;
+  --blue-lt:     #3b82f6;
+  --blue-bg:     #eff6ff;
+  --indigo:      #4f46e5;
+  --green:       #16a34a;
+  --amber:       #d97706;
+  --red:         #dc2626;
+
+  /* Neutral palette */
+  --bg:          #f0f4f8;
+  --surface:     #ffffff;
+  --border:      #e2e8f0;
+  --border-dark: #cbd5e1;
+  --text:        #1e293b;
+  --text-muted:  #64748b;
+  --text-light:  #94a3b8;
+
+  /* Sizing */
+  --radius:    10px;
+  --radius-lg: 16px;
+  --shadow:    0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 10px 30px rgba(0,0,0,.08);
+
+  /* Header height */
+  --header-h: 64px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── 2. HEADER ──────────────────────────────────────────────── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgba(0,0,0,.06);
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand logo */
+.brand { display: flex; align-items: center; gap: .75rem; }
+
+.brand-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), var(--indigo));
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.3px;
+}
+
+.brand-sub {
+  display: block;
+  font-size: .72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* IBM badge */
+.header-badge {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: .35rem .9rem;
+}
+
+.badge-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.8); }
+}
+
+/* ── 3. MAIN TWO-PANEL LAYOUT ───────────────────────────────── */
+.main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 1.5rem;
+  min-height: calc(100vh - var(--header-h) - 60px);
+  align-items: start;
+}
+
+/* ── 4. PANELS ──────────────────────────────────────────────── */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+}
+
+/* Sticky input panel */
+.panel-input {
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── 5. PANEL TITLE ─────────────────────────────────────────── */
+.panel-title {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+}
+
+.panel-icon { font-size: 1.6rem; line-height: 1; margin-top: .1rem; }
+
+.panel-title h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.panel-title p {
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-top: .15rem;
+}
+
+/* ── 6. TEXTAREA ────────────────────────────────────────────── */
+.textarea-wrap {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color .2s;
+}
+
+.textarea-wrap:focus-within {
+  border-color: var(--blue-lt);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+
+#inputText {
+  width: 100%;
+  min-height: 180px;
+  padding: .9rem 1rem;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+  font-size: .9rem;
+  color: var(--text);
+  background: var(--surface);
+  line-height: 1.65;
+}
+
+#inputText::placeholder { color: var(--text-light); }
+
+.textarea-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .45rem .75rem;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  font-size: .78rem;
+  color: var(--text-muted);
+}
+
+.btn-ghost {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: .78rem;
+  color: var(--text-muted);
+  padding: .2rem .5rem;
+  border-radius: 4px;
+  transition: background .15s, color .15s;
+}
+.btn-ghost:hover { background: var(--border); color: var(--red); }
+
+/* ── 7. LEVEL CARDS ─────────────────────────────────────────── */
+.level-label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: .6rem;
+}
+
+.level-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .6rem;
+}
+
+.level-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .25rem;
+  padding: .75rem .5rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+}
+
+.level-card:hover {
+  border-color: var(--blue-lt);
+  background: var(--blue-bg);
+}
+
+.level-card.active {
+  border-color: var(--blue);
+  background: var(--blue-bg);
+  box-shadow: 0 0 0 3px rgba(29,78,216,.12);
+}
+
+.level-emoji { font-size: 1.4rem; }
+
+.level-title {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.level-desc {
+  font-size: .7rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* ── 8. SIMPLIFY BUTTON ─────────────────────────────────────── */
+.btn-simplify {
+  width: 100%;
+  padding: .9rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--blue), var(--indigo));
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  transition: opacity .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 15px rgba(29,78,216,.35);
+}
+
+.btn-simplify:hover {
+  opacity: .93;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(29,78,216,.45);
+}
+
+.btn-simplify:active { transform: translateY(0); }
+
+.btn-simplify.loading {
+  opacity: .7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-icon { font-size: 1.1rem; }
+
+/* ── 9. TIPS BOX ────────────────────────────────────────────── */
+.tips-box {
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius);
+  padding: .9rem 1rem;
+}
+
+.tips-title {
+  font-size: .82rem;
+  font-weight: 600;
+  color: #92400e;
+  margin-bottom: .4rem;
+}
+
+.tips-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.tips-box li {
+  font-size: .8rem;
+  color: #78350f;
+  padding-left: 1.1rem;
+  position: relative;
+}
+.tips-box li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+}
+
+/* ── 10. OUTPUT PANEL — PLACEHOLDER ─────────────────────────── */
+.panel-output {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.output-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  gap: 1rem;
+}
+
+.placeholder-icon { font-size: 3.5rem; }
+
+.output-placeholder h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.output-placeholder p {
+  font-size: .88rem;
+  color: var(--text-muted);
+  max-width: 340px;
+}
+
+/* ── 11. LOADING STATE ──────────────────────────────────────── */
+.output-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 3rem;
+}
+
+.output-loading p {
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+
+/* Spinner ring */
+.loader-ring {
+  width: 44px; height: 44px;
+  border: 4px solid var(--border);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── 12. OUTPUT RESULTS ─────────────────────────────────────── */
+.output-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── 13. TABS NAVIGATION ────────────────────────────────────── */
+.tabs-nav {
+  display: flex;
+  gap: .35rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: .45rem .9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  background: var(--bg);
+  font-family: inherit;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .18s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  border-color: var(--blue-lt);
+  color: var(--blue);
+  background: var(--blue-bg);
+}
+
+.tab-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ── 14. OUTPUT CARDS ───────────────────────────────────────── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.output-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.output-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.output-card-title {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .3rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  background: var(--surface);
+  font-family: inherit;
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.copy-btn:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.copy-btn.copied {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.output-body {
+  padding: 1.25rem;
+  font-size: .9rem;
+  line-height: 1.75;
+  color: var(--text);
+  min-height: 120px;
+}
+
+/* Output content styling */
+.output-body p { margin-bottom: .75rem; }
+.output-body p:last-child { margin-bottom: 0; }
+
+.output-body ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.output-body li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.output-body li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--blue-lt);
+  font-size: .9rem;
+}
+
+/* Vocab items */
+.vocab-item {
+  margin-bottom: .75rem;
+  padding: .6rem .9rem;
+  background: var(--bg);
+  border-left: 3px solid var(--blue-lt);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.vocab-term {
+  font-weight: 600;
+  color: var(--blue);
+  font-size: .88rem;
+}
+
+.vocab-def {
+  color: var(--text-muted);
+  font-size: .85rem;
+  margin-top: .15rem;
+}
+
+/* Q&A items */
+.qa-item {
+  margin-bottom: 1rem;
+  padding: .75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #f8faff;
+}
+
+.qa-q {
+  font-weight: 600;
+  color: var(--indigo);
+  font-size: .88rem;
+  margin-bottom: .4rem;
+}
+
+.qa-q::before { content: 'Q: '; }
+
+.qa-a {
+  color: var(--text);
+  font-size: .87rem;
+  line-height: 1.6;
+}
+
+.qa-a::before {
+  content: 'A: ';
+  font-weight: 600;
+  color: var(--green);
+}
+
+/* ── 15. HELPER CLASS ───────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ── 16. TOAST NOTIFICATION ─────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1e293b;
+  color: #fff;
+  padding: .65rem 1.4rem;
+  border-radius: 50px;
+  font-size: .85rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: transform .3s ease, opacity .3s ease;
+  pointer-events: none;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ── 17. FOOTER ─────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: .78rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* ── 18. RESPONSIVE ──────────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .main {
+    grid-template-columns: 360px 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+/* Mobile landscape / small tablet */
+@media (max-width: 780px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-input {
+    position: static; /* remove sticky on mobile */
+  }
+
+  .brand-sub { display: none; }
+
+  .level-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .header-inner { padding: 0 1rem; }
+
+  .main { padding: .75rem; gap: .75rem; }
+
+  .panel { padding: 1.25rem; }
+
+  .header-badge { display: none; }
+
+  .tabs-nav { gap: .3rem; }
+
+  .tab-btn { font-size: .76rem; padding: .4rem .7rem; }
+
+  .level-desc { display: none; }
+}
